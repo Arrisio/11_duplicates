@@ -1,21 +1,20 @@
 import os
-from collections import Counter, defaultdict
+from collections import defaultdict
 import argparse
 
 
 def find_duplicates(directory):
-    files_counter = Counter()
     files_locations = defaultdict(list)
-    for root, _, files in os.walk(directory):
-        for file in files:
-            file_path = os.path.join(root, file)
+    for root, _, file_names in os.walk(directory):
+        for file_name in file_names:
+            file_path = os.path.join(root, file_name)
             file_size = os.path.getsize(file_path)
-            files_counter[(file, file_size)] += 1
-            files_locations[(file, file_size)].append(file_path)
+            files_locations[(file_name, file_size)].append(file_path)
 
     return {
-        file_idx: files_locations[file_idx]
-        for file_idx in files_counter if files_counter[file_idx] > 1
+        file_idx: file_paths
+        for file_idx, file_paths in files_locations.items()
+        if len(file_paths) > 1
     }
 
 
