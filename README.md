@@ -1,6 +1,6 @@
 # Anti-Duplicator
 
-[TODO. There will be project description]
+This tool could help you to find all duplicated (files with the same name and size) files in a target directory.
 
 # Project Goals
 
